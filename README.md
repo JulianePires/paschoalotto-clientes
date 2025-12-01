@@ -1,59 +1,168 @@
-# PaschoalottoClientes
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.1.
+# Paschoalotto - Gestão de Clientes
 
-## Development server
+Este projeto foi criado para atender ao desafio de Desenvolvedor Frontend Angular da Paschoalotto.
 
-To start a local development server, run:
 
-```bash
-ng serve
-```
+## Demonstração
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Insira um gif ou um link de alguma demonstração
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Funcionalidades
 
-```bash
-ng generate component component-name
-```
+- Listagem de clientes com paginação
+- Cadastro e edição
+- Visualização de detalhes
+- Upload de imagem
+- Comunicação com API mockada
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
+## Stack utilizada
 
-## Building
+**Front-end:** Angular 21, Angular Material, TailwindCSS, Vitest
 
-To build the project run:
+**Api Mock:** Json Server, Multer (multipart/form-data), Express
 
-```bash
-ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Instalação
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Instale as dependências do proejto com bun
 
 ```bash
-ng test
+  bun install
 ```
+    
+## Rodando localmente
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Clone o projeto
 
 ```bash
-ng e2e
+  git clone https://github.com/JulianePires/paschoalotto-clientes
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Entre no diretório do projeto
 
-## Additional Resources
+```bash
+  cd paschoalotto-clientes
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Instale as dependências
+
+```bash
+  bun install
+```
+
+Inicie o servidor
+
+```bash
+  bun run server
+```
+
+Inicie a aplicação
+
+```bash
+  bun run start
+```
+
+
+
+
+## Rodando os testes
+
+Para rodar os testes, rode o seguinte comando
+
+```bash
+  bun run test
+```
+
+
+## Documentação da API Mockada
+
+#### Retorna todos os clientes com paginação
+
+```http
+  GET http://localhost:4000/clientes?page=1&pageSize;=10&query=
+```
+
+| Parâmetro   | Tipo       | Descrição                           |
+| :---------- | :--------- | :---------------------------------- |
+| `page`      | `number`   | Página atual.                       |
+| `pageSize`  | `number`   | Quantidade de arquivos por página.  |
+| `pageSize`  | `number`   | Quantidade de arquivos por página.  |
+
+#### Retorna um cliente
+
+```http
+  GET http://localhost:4000/clientes/:id
+```
+
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `id`        | `string`   | **Obrigatório**. O ID do item que você quer |
+
+#### Cria um cliente
+
+```http
+  POST http://localhost:4000/clientes
+```
+| Propriedade   | Tipo       | Descrição                             |
+| :------------ | :--------- | :------------------------------------ |
+| `nome`        | `string`   | **Obrigatório**. Nome do cliente.     |
+| `email`       | `string`   | **Obrigatório**. E-mail do cliente.   |
+| `telefone`    | `string`   | **Obrigatório**. Telefone do cliente. |
+| `cidade`      | `string`   | **Obrigatório**. Cidade do cliente.   |
+
+#### Atualiza um cliente
+
+```http
+  PUT http://localhost:4000/clientes/:id
+```
+| Parâmetro   | Tipo       | Descrição                                             |
+| :---------- | :--------- | :---------------------------------------------------- |
+| `id`        | `string`   | **Obrigatório**. O ID do item que você quer atualizar |
+
+| Propriedade   | Tipo       | Descrição             |
+| :------------ | :--------- | :-------------------- |
+| `nome`        | `string`   |  Nome do cliente.     |
+| `email`       | `string`   |  E-mail do cliente.   |
+| `telefone`    | `string`   |  Telefone do cliente. |
+| `cidade`      | `string`   |  Cidade do cliente.   |
+
+#### Realiza upload do logotipo de um cliente
+
+```http
+  POST http://localhost:4000/clientes/:id
+```
+
+| Parâmetro   | Tipo       | Descrição                                             |
+| :---------- | :--------- | :---------------------------------------------------- |
+| `id`        | `string`   | **Obrigatório**. O ID do item que você quer atualizar |
+
+
+
+#### Exclui um cliente
+
+```http
+  PUT http://localhost:4000/clientes/:id
+```
+| Parâmetro   | Tipo       | Descrição                                           |
+| :---------- | :--------- | :-------------------------------------------------- |
+| `id`        | `string`   | **Obrigatório**. O ID do item que você quer excluir |
+
+| Propriedade   | Tipo                    | Descrição                           |
+| :------------ | :---------------------- | :---------------------------------- |
+| `form-data`   | `multipart/form-data`   |  Imagem de logotipo do cliente.     |
+
+
+## Referência
+
+ - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+ - [Awesome README](https://github.com/matiassingers/awesome-readme)
+ - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+
+
+## Autores
+
+- [@JulianePires](https://www.github.com/JulianePires)
+

@@ -1,0 +1,45 @@
+GET http://localhost:4000/clientes?page=1&pageSize=10 HTTP/1.1
+
+###
+
+GET http://localhost:4000/clientes/2 HTTP/1.1
+
+###
+
+POST http://localhost:4000/clientes HTTP/1.1
+content-Type: application/json
+
+{
+  "nome": "Novo Cliente",
+  "email": "novo.cliente@example.com",
+  "telefone": "123456789",
+  "cidade": "Cidade Exemplo"
+}
+
+###
+
+PUT http://localhost:4000/clientes/2 HTTP/1.1
+content-Type: application/json
+
+{
+  "nome": "Cliente Atualizado",
+  "email": "cliente.atualizado@example.com",
+  "telefone": "987654321",
+  "cidade": "Cidade Atualizada"
+}
+
+###
+
+POST http://localhost:4000/clientes/3/upload
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="logotipo"; filename="logo.png"
+Content-Type: image/png
+
+< ./logo.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+
+DELETE http://localhost:4000/clientes/2 HTTP/1.1

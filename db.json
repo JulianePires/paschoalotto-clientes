@@ -1,0 +1,41 @@
+{
+  "clientes": [
+    {
+      "id": "3",
+      "nome": "Mariana Costa",
+      "email": "mariana.costa@example.com",
+      "telefone": "+5531987654321",
+      "cidade": "Belo Horizonte",
+      "logotipo": "/uploads/1764628802481-logotipo.png"
+    },
+    {
+      "id": "4",
+      "nome": "Thiago Pereira",
+      "email": "thiago.pereira@example.com",
+      "telefone": "+5541987234567",
+      "cidade": "Curitiba",
+      "logotipo": ""
+    },
+    {
+      "id": "5",
+      "nome": "Fernanda Almeida",
+      "email": "fernanda.almeida@example.com",
+      "telefone": "+5571987001122",
+      "cidade": "Salvador",
+      "logotipo": ""
+    },
+    {
+      "id": "c949",
+      "nome": "Cliente Teste",
+      "email": "teste@teste.com",
+      "telefone": "123456789"
+    },
+    {
+      "id": "78f6",
+      "nome": "Novo Cliente",
+      "email": "novo.cliente@example.com",
+      "telefone": "123456789",
+      "cidade": "Cidade Exemplo"
+    }
+  ]
+}
