@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from '../../core/core-module';
 import { SharedModule } from '../../shared/shared-module';
 import { ComponentsModule } from './components/components-module';
@@ -10,7 +11,9 @@ import { ComponentsModule } from './components/components-module';
     CommonModule,
     ComponentsModule,
     CoreModule,
-    SharedModule
-  ]
+    SharedModule,
+    ReactiveFormsModule,
+  ],
+  exports: [ComponentsModule, CoreModule, SharedModule, ReactiveFormsModule, CommonModule],
 })
-export class ClientesModule { }
+export class ClientesModule {}

@@ -1,3 +1,41 @@
-<form class="flex flex-col">
-    <app-input-busca />
-</form>
+<div class="flex flex-col gap-2">
+  <span class="flex w-full items-center justify-center gap-4">
+    <app-input-busca (change)="updateSearch($event)" />
+    <a
+      mat-button
+      color="primary"
+      size="small"
+      class="text-sm"
+      href="/criar"
+      role="button"
+    >
+      Criar Cliente
+  </a>
+</span>
+  <mat-accordion class="flex flex-col h-full grow justify-center gap-4" multi>
+    @for (cliente of clientes; track cliente.id) {
+    <app-item-cliente
+      [nome]="cliente.nome"
+      [telefone]="cliente.telefone"
+      [cidade]="cliente.cidade"
+      [logotipo]="cliente.logotipo || ''"
+      [id]="cliente.id.toString()"
+      (excluir)="prepararExclusaoCliente(cliente.id.toString())"
+    ></app-item-cliente>
+    } @empty {
+    <div class="flex flex-col items-center justify-center w-full h-full">
+      Sem resultado de clientes
+    </div>
+    }
+    <mat-paginator
+      class="mt-4"
+      [length]="clientes.length"
+      [pageSize]="limitePorPagina"
+      [pageIndex]="paginaAtual - 1"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page"
+      (page)="changePage($event.pageIndex + 1); changeLimit($event.pageSize)"
+    >
+    </mat-paginator>
+  </mat-accordion>
+</div>

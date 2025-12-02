@@ -4,6 +4,7 @@ import { Footer } from './footer/footer';
 import { Header } from './header/header';
 import { InputBusca } from './input-busca/input-busca';
 import { ModalConfirmacao } from './modal-confirmacao/modal-confirmacao';
+import { Loader } from './loader/loader';
 
 
 
@@ -14,13 +15,15 @@ import { ModalConfirmacao } from './modal-confirmacao/modal-confirmacao';
     Footer,
     Header,
     InputBusca,
-    ModalConfirmacao
+    ModalConfirmacao,
+    Loader
   ],
   exports: [
     Footer,
     Header,
     InputBusca,
-    ModalConfirmacao
+    ModalConfirmacao,
+    Loader
   ]
 })
 export class ComponentsModule { }
