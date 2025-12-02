@@ -1,1 +1,5 @@
-<p>input-busca works!</p>
+<mat-form-field appearance="fill" class="whitespace-normal w-full">
+  <mat-label for="buscar-cliente">Buscar Cliente</mat-label>
+  <input matInput id="buscar-cliente" class="w-full" (input)="onChangeBusca($event)" />
+  <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>

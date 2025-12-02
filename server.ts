@@ -15,10 +15,10 @@ const middlewares = jsonServer.defaults();
 
 app.use(middlewares);
 
-const uploadDir = path.join(__dirname, 'uploads');
+const uploadDir = path.join(__dirname, 'public/uploads');
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
-app.use('/uploads', express.static(uploadDir));
+app.use('/public/uploads', express.static(uploadDir));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -44,6 +44,44 @@ app.post('/clientes/:id/upload', upload.single('logotipo'), (req, res) => {
   (db.get('clientes') as any).find({ id: id }).assign({ logotipo: filePath }).write();
 
   return res.json({ id, logotipo: filePath });
+});
+
+app.get('/clientes', (req, res, next) => {
+  try {
+    const db = router.db;
+    let items = (db.get('clientes') as any).value() as any[];
+
+    const page = Math.max(1, parseInt((req.query['page'] as string) || '1', 10));
+    const pageSize = Math.max(1, parseInt((req.query['pageSize'] as string) || '10', 10));
+    const q = ((req.query['search'] as string) || '').trim().toLowerCase();
+
+    if (q) {
+      items = items.filter(c => {
+        const nome = (c.nome || '').toString().toLowerCase();
+        return (
+          nome.includes(q)
+        );
+      });
+    }
+
+    const total = items.length;
+    const totalPages = Math.max(1, Math.ceil(total / pageSize));
+    const currentPage = Math.min(page, totalPages);
+
+    const start = (currentPage - 1) * pageSize;
+    const end = start + pageSize;
+
+    const paginated = items.slice(start, end);
+
+    // expose total count so frontend can read it
+    res.setHeader('X-Total-Count', String(total));
+    res.setHeader('Access-Control-Expose-Headers', 'X-Total-Count');
+
+    // return paginated array (keeps compatibility with json-server default)
+    return res.json(paginated);
+  } catch (err) {
+    return next(err);
+  }
 });
 
 app.use(router);

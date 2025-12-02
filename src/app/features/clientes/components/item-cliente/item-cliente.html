@@ -1,0 +1,17 @@
+<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+  <mat-expansion-panel-header>
+    <mat-panel-title class="capitalize flex gap-2">
+      @if (logotipo().length > 0) {
+      <img src="{{ logotipo() }}" alt="Logotipo de {{ nome() }}" class="w-6 h-6 rounded-full" />
+      } {{ nome() }}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <span class="flex justify-between">
+    <span class="text-sm">
+      <p><strong class="text-blue-800">Cidade:</strong> {{ cidade() }}</p>
+      <p><strong class="text-blue-800">Telefone:</strong> {{ telefone() }}</p>
+    </span>
+
+    <app-acoes-cliente [idCliente]="id()" (onExcluir)="excluirCliente()" />
+  </span>
+</mat-expansion-panel>
