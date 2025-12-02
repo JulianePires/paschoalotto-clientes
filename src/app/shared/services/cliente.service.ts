@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IAtualizarCliente, ICriarCliente, IFiltros } from '../types/request.type';
-import { ICliente } from '../types/cliente.type';
 import { Observable } from 'rxjs';
+import { ICliente } from '../types/cliente.type';
+import { IAtualizarCliente, ICriarCliente, IFiltros } from '../types/request.type';
 
 @Injectable({
   providedIn: 'root',

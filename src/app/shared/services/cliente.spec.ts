@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { ClienteService } from './cliente.service';
 
 describe('Cliente', () => {
-  let service: Cliente;
+  let service: ClienteService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(Cliente);
+    service = TestBed.inject(ClienteService);
   });
 
   it('deve ser criado', () => {
@@ -30,6 +31,7 @@ describe('Cliente', () => {
       nome: 'Cliente Teste',
       email: 'teste@teste.com',
       telefone: '123456789',
+      cidade: 'Cidade Teste'
     };
     service.criarCliente(novoCliente).subscribe((response) => {
       expect(response).toBeDefined();
