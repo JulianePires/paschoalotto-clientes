@@ -7,8 +7,10 @@ import { ModalUpload } from './modal-upload/modal-upload';
 import { ItemCliente } from './item-cliente/item-cliente';
 import { AcoesCliente } from './acoes-cliente/acoes-cliente';
 import { MatButtonModule } from '@angular/material/button';
-
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -20,7 +22,11 @@ import { MatButtonModule } from '@angular/material/button';
     ModalUpload,
     AcoesCliente,
     ItemCliente,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatExpansionModule
   ],
   exports: [
     CommonModule,
@@ -30,7 +36,11 @@ import { MatButtonModule } from '@angular/material/button';
     ModalUpload,
     AcoesCliente,
     ItemCliente,
-    MatButtonModule
-  ]
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatExpansionModule
+  ],
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

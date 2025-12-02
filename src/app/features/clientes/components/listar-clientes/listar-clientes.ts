@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ModalConfirmacao } from '../../../../core/components/modal-confirmacao/modal-confirmacao';
 import { ClienteService } from '../../../../shared/services/cliente.service';
@@ -9,7 +8,7 @@ import { ClientesModule } from '../../clientes-module';
 
 @Component({
   selector: 'app-listar-clientes',
-  imports: [ClientesModule, MatAccordion, MatPaginatorModule],
+  imports: [ClientesModule, MatPaginatorModule],
   templateUrl: './listar-clientes.html',
 })
 export class ListarClientes implements OnInit {

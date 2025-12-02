@@ -1,11 +1,10 @@
 import { Component, inject, input, output } from '@angular/core';
-import { MatIconButton } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
+import { ClientesModule } from '../../clientes-module';
 
 @Component({
   selector: 'app-acoes-cliente',
-  imports: [MatIconButton, MatIconModule],
+  imports: [ClientesModule],
   templateUrl: './acoes-cliente.html',
 })
 export class AcoesCliente {

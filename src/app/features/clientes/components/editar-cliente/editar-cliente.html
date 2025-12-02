@@ -1,1 +1,58 @@
-<p>editar-cliente {{ idUsuario }}</p>
+<div class="flex flex-col p-8 gap-4 min-h-full">
+  <button mat-button class="back-button self-start" (click)="voltar()">
+    <mat-icon>arrow_back</mat-icon>
+    Voltar
+  </button>
+
+  <form [formGroup]="form" (ngSubmit)="abrirConfirmacaoEditar()">
+    <div class="w-12 h-12 rounded-full overflow-hidden mb-4 bg-blue-900">
+      @if(!form.get('logotipo')?.value) {
+      <img [src]="form.get('logotipo')?.value" alt="Logotipo" class="w-full h-full object-cover" />
+      }
+      <input type="file" (change)="uploadLogotipo($event)" />
+    </div>
+
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Nome</mat-label>
+      <input matInput formControlName="nome" />
+      @if (form.get('nome')?.hasError('required')) {
+      <mat-error>Nome é obrigatório</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      @if (form.get('email')?.hasError('required')) {
+      <mat-error>Email é obrigatório</mat-error>
+
+      } @if (form.get('email')?.hasError('email')) {
+      <mat-error>Email inválido</mat-error>
+
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Telefone</mat-label>
+      <input matInput formControlName="telefone" (blur)="telefoneBlur()" />
+      @if(form.get('telefone')?.hasError('required')) {
+      <mat-error>Telefone é obrigatório</mat-error>
+      } @if(form.get('telefone')?.hasError('invalidPhone')) {
+      <mat-error>Telefone inválido (mínimo 8 dígitos)</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full mb-4">
+      <mat-label>Cidade</mat-label>
+      <input matInput formControlName="cidade" />
+      @if(form.get('cidade')?.hasError('required')) {
+      <mat-error>Cidade é obrigatória</mat-error>
+      }
+    </mat-form-field>
+
+    <div class="flex gap-4 justify-end">
+      <button mat-stroked-button type="button" (click)="voltar()">Cancelar</button>
+      <button mat-flat-button color="primary" type="submit">Salvar</button>
+    </div>
+  </form>
+</div>
