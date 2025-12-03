@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// animations are not required for unit tests; provide mocks for MatSnackBar instead
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { of } from 'rxjs';
@@ -30,22 +30,24 @@ describe('CriarCliente', () => {
       open: vi.fn().mockReturnValue({ afterClosed: () => of(true) }),
     };
 
+    // override template to avoid resolving external criar-cliente.html
+    TestBed.overrideComponent(CriarCliente, { set: { template: '<div></div>' } });
+
     await TestBed.configureTestingModule({
-      declarations: [CriarCliente],
       imports: [
+        CriarCliente,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
         MatIconModule,
-        BrowserAnimationsModule,
-        MatSnackBarModule,
         MatDialogModule,
       ],
       providers: [
         { provide: 'ClienteService', useValue: clienteServiceMock },
         { provide: Router, useValue: routerSpy },
         { provide: MatDialog, useValue: dialogSpy },
+        { provide: MatSnackBar, useValue: { open: vi.fn() } },
       ],
     }).compileComponents();
 

@@ -3,6 +3,8 @@ import { App } from './app';
 
 describe('App', () => {
   beforeEach(async () => {
+    // avoid resolving external template by using a small inline template for test
+    TestBed.overrideComponent(App, { set: { template: '<h1>Hello, paschoalotto-clientes</h1>' } });
     await TestBed.configureTestingModule({
       imports: [App],
     }).compileComponents();

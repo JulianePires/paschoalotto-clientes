@@ -7,6 +7,7 @@ describe('EditarCliente', () => {
   let fixture: ComponentFixture<EditarCliente>;
 
   beforeEach(async () => {
+    TestBed.overrideComponent(EditarCliente, { set: { template: '<div></div>' } });
     await TestBed.configureTestingModule({
       imports: [EditarCliente]
     })

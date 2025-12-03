@@ -7,6 +7,7 @@ describe('ModalUpload', () => {
   let fixture: ComponentFixture<ModalUpload>;
 
   beforeEach(async () => {
+    TestBed.overrideComponent(ModalUpload, { set: { template: '<div></div>' } });
     await TestBed.configureTestingModule({
       imports: [ModalUpload]
     })

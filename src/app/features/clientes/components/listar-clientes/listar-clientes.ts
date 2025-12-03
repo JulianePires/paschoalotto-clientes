@@ -28,7 +28,6 @@ export class ListarClientes implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('Changes detected:', changes);
     if (changes['buscaCliente'] || changes['paginaAtual'] || changes['limitePorPagina']) {
       this.listarClientes();
     }
@@ -86,7 +85,6 @@ export class ListarClientes implements OnInit, OnChanges {
   }
 
   atualizarPaginacao(event: any) {
-    console.log('Paginador evento:', event);
     const novaPagina = event.pageIndex + 1;
     const novoLimite = event.pageSize;
 

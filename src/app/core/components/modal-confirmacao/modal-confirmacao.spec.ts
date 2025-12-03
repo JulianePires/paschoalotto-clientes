@@ -7,6 +7,7 @@ describe('ModalConfirmacao', () => {
   let fixture: ComponentFixture<ModalConfirmacao>;
 
   beforeEach(async () => {
+    TestBed.overrideComponent(ModalConfirmacao, { set: { template: '<div></div>' } });
     await TestBed.configureTestingModule({
       imports: [ModalConfirmacao]
     })

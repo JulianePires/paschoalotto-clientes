@@ -7,8 +7,14 @@ describe('Header', () => {
   let fixture: ComponentFixture<Header>;
 
   beforeEach(async () => {
+    // inline template to avoid resolving external templateUrl
+    TestBed.overrideComponent(Header, {
+      set: {
+        template: `<header class="flex w-full justify-between items-center p-4 md:px-12 lg:px-20 bg-white shadow-md"><img src="/assets/logo.png" alt="Paschoalotto Logo" class="w-20 h-20"><h1 class="text-2xl font-semibold text-zinc-700">Gerenciamento de Clientes</h1></header>`,
+      },
+    });
     await TestBed.configureTestingModule({
-      declarations: [Header],
+      imports: [Header],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Header);

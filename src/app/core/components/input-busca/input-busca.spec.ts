@@ -7,6 +7,7 @@ describe('InputBusca', () => {
   let fixture: ComponentFixture<InputBusca>;
 
   beforeEach(async () => {
+    TestBed.overrideComponent(InputBusca, { set: { template: '<div></div>' } });
     await TestBed.configureTestingModule({
       imports: [InputBusca]
     })

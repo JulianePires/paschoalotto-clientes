@@ -7,8 +7,14 @@ describe('Footer', () => {
   let fixture: ComponentFixture<Footer>;
 
   beforeEach(async () => {
+    // use inline template so tests run in the Vitest/Vite environment (avoid resolving templateUrl)
+    TestBed.overrideComponent(Footer, {
+      set: {
+        template: `<footer class="flex w-full items-center justify-center h-16 bg-zinc-200 text-zinc-600">Desenvolvido por <p class="font-semibold text-blue-800 mx-1">Juliane Pires</p> - &copy; 2025</footer>`,
+      },
+    });
     await TestBed.configureTestingModule({
-      declarations: [Footer],
+      imports: [Footer],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Footer);

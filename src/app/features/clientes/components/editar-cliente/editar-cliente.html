@@ -5,13 +5,24 @@
   </button>
 
   <form [formGroup]="form" (ngSubmit)="abrirConfirmacaoEditar()" class="flex flex-col gap-4">
-    <div class="w-24 h-24 rounded-full overflow-hidden mb-8 bg-gray-300 self-center flex items-center justify-center">
+    <div class="w-24 h-24 rounded-full overflow-hidden mb-8 bg-gray-300 self-center flex items-center justify-center cursor-pointer relative group"
+      (click)="onAvatarClick($event)"
+      (keydown)="onAvatarKeydown($event)"
+      role="button"
+      tabindex="0"
+      aria-label="Alterar logotipo do cliente">
       @if(form.get('logotipo')?.value !== '') {
       <img [src]="form.get('logotipo')?.value" alt="Logotipo" class="w-full h-full object-cover" />
       } @else {
         <mat-icon>upload</mat-icon>
       }
-      <input type="file" (change)="uploadLogotipo($event)" class="hidden" />
+
+      <!-- overlay edit icon (appears on hover / focus) -->
+      <div class="absolute inset-0 bg-black bg-opacity-25 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity" aria-hidden="true">
+        <mat-icon class="text-white">edit</mat-icon>
+      </div>
+
+      <input #fileInput type="file" (change)="uploadLogotipo($event)" class="hidden" />
     </div>
 
     <mat-form-field appearance="fill" class="w-full">

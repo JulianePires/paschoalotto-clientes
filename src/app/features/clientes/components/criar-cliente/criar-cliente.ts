@@ -74,7 +74,6 @@ export class CriarCliente {
 
     this.clienteService.criarCliente(payload as any).subscribe({
       next: (created) => {
-        console.log('CriarCliente: cliente criado', created);
         this.snack.open('Cliente criado com sucesso', 'Fechar', { duration: 3000 });
         this.router.navigate(['/']);
       },

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,7 +23,8 @@ import { MatInputModule } from '@angular/material/input';
   ],
   templateUrl: './editar-cliente.html',
 })
-export class EditarCliente {
+export class EditarCliente implements OnInit {
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   private route = inject(ActivatedRoute);
   idUsuario: string | null = this.route.snapshot.paramMap.get('id');
   private fb = inject(FormBuilder);
@@ -31,7 +32,6 @@ export class EditarCliente {
   private clienteService = inject(ClienteService);
   private dialog = inject(MatDialog);
   private snack = inject(MatSnackBar);
-  fileInputRef = inject<HTMLInputElement>(HTMLInputElement);
 
   form = this.fb.group({
     logotipo: [''],
@@ -40,6 +40,10 @@ export class EditarCliente {
     telefone: ['', [Validators.required]],
     cidade: ['', [Validators.required]],
   });
+
+  ngOnInit() {
+    this.buscarInfoCliente();
+  }
 
   voltar() {
     this.router.navigate(['/']);
@@ -65,6 +69,24 @@ export class EditarCliente {
     });
   }
 
+  buscarInfoCliente() {
+    this.clienteService.buscarClientePorId(this.idUsuario!).subscribe({
+      next: (cliente) => {
+        this.form.patchValue({
+          nome: cliente.nome,
+          email: cliente.email,
+          telefone: cliente.telefone,
+          cidade: cliente.cidade,
+          logotipo: cliente.logotipo || '',
+        });
+      },
+      error: (err) => {
+        console.error('EditarCliente: erro ao buscar info do cliente', err);
+        this.snack.open('Erro ao buscar informações do cliente', 'Fechar', { duration: 4000 });
+      },
+    });
+  }
+
   editarCliente() {
     const payload = {
       nome: String(this.form.get('nome')?.value || ''),
@@ -73,15 +95,14 @@ export class EditarCliente {
       cidade: String(this.form.get('cidade')?.value || ''),
     };
 
-    this.clienteService.atualizarCliente(Number(this.idUsuario!), payload as any).subscribe({
+  this.clienteService.atualizarCliente(this.idUsuario!, payload as any).subscribe({
       next: (created) => {
-        console.log('EditarCliente: cliente atualizado', created);
         this.snack.open('Cliente atualizado com sucesso', 'Fechar', { duration: 3000 });
         this.router.navigate(['/']);
       },
       error: (err) => {
-        console.error('CriarCliente: erro ao criar cliente', err);
-        this.snack.open('Erro ao criar cliente', 'Fechar', { duration: 4000 });
+        console.error('EditarCliente: erro ao atualizar cliente', err);
+        this.snack.open('Erro ao atualizar cliente', 'Fechar', { duration: 4000 });
       },
     });
   }
@@ -96,7 +117,7 @@ export class EditarCliente {
       reader.readAsDataURL(file);
     }
 
-    this.clienteService.atualizarLogotipoCliente(Number(this.idUsuario!), file).subscribe({
+  this.clienteService.atualizarLogotipoCliente(this.idUsuario!, file).subscribe({
       next: () => {
         this.snack.open('Logotipo atualizado com sucesso', 'Fechar', { duration: 3000 });
       },
@@ -105,6 +126,23 @@ export class EditarCliente {
         this.snack.open('Erro ao atualizar logotipo', 'Fechar', { duration: 4000 });
       },
     });
+  }
+
+  onAvatarClick(event: Event) {
+    event.stopPropagation();
+    try {
+      this.fileInput?.nativeElement?.click();
+    } catch (e) {
+      console.warn('file input not available to open', e);
+    }
+  }
+
+  onAvatarKeydown(event: KeyboardEvent) {
+    const key = event.key;
+    if (key === 'Enter' || key === ' ' || key === 'Spacebar') {
+      event.preventDefault();
+      this.onAvatarClick(event);
+    }
   }
 
   telefoneBlur() {
