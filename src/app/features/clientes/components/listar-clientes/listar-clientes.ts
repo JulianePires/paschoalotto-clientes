@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -11,17 +11,12 @@ import { ItemCliente } from '../item-cliente/item-cliente';
 
 @Component({
   selector: 'app-listar-clientes',
-  imports: [
-    MatPaginatorModule,
-    ItemCliente,
-    InputBusca,
-    MatButtonModule,
-    MatExpansionModule
-  ],
+  imports: [MatPaginatorModule, ItemCliente, InputBusca, MatButtonModule, MatExpansionModule],
   templateUrl: './listar-clientes.html',
 })
-export class ListarClientes implements OnInit {
+export class ListarClientes implements OnInit, OnChanges {
   clientes: ICliente[] = [];
+  totalClientes = 0;
   paginaAtual = 1;
   limitePorPagina = 10;
   buscaCliente = '';
@@ -32,6 +27,13 @@ export class ListarClientes implements OnInit {
     this.listarClientes();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('Changes detected:', changes);
+    if (changes['buscaCliente'] || changes['paginaAtual'] || changes['limitePorPagina']) {
+      this.listarClientes();
+    }
+  }
+
   listarClientes() {
     this.clienteService
       .buscarClientes({
@@ -39,8 +41,9 @@ export class ListarClientes implements OnInit {
         limit: this.limitePorPagina,
         search: this.buscaCliente,
       })
-      .subscribe((data) => {
-        this.clientes = data;
+      .subscribe((res) => {
+        this.clientes = res.data;
+        this.totalClientes = res.total;
       });
   }
 
@@ -60,7 +63,7 @@ export class ListarClientes implements OnInit {
   }
 
   confirmarExclusao(id: string) {
-    this.clienteService.deletarCliente(Number(id)).subscribe({
+    this.clienteService.deletarCliente(id).subscribe({
       next: () => {
         this.listarClientes();
       },
@@ -68,20 +71,6 @@ export class ListarClientes implements OnInit {
         console.error('ListarClientes: erro ao deletar cliente', err);
       },
     });
-  }
-
-  // Helpers for template interaction
-  changePage(page: number) {
-    if (page === this.paginaAtual) return;
-    this.paginaAtual = page;
-    this.listarClientes();
-  }
-
-  changeLimit(limit: number) {
-    if (limit === this.limitePorPagina) return;
-    this.limitePorPagina = limit;
-    this.paginaAtual = 1;
-    this.listarClientes();
   }
 
   updateSearch(event: Event) {
@@ -94,5 +83,17 @@ export class ListarClientes implements OnInit {
 
   trackById(_: number, cliente: ICliente) {
     return cliente?.id;
+  }
+
+  atualizarPaginacao(event: any) {
+    console.log('Paginador evento:', event);
+    const novaPagina = event.pageIndex + 1;
+    const novoLimite = event.pageSize;
+
+    if (novaPagina !== this.paginaAtual || novoLimite !== this.limitePorPagina) {
+      this.paginaAtual = novaPagina;
+      this.limitePorPagina = novoLimite;
+      this.listarClientes();
+    }
   }
 }
