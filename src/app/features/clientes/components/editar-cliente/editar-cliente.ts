@@ -1,18 +1,25 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalConfirmacao } from '../../../../core/components/modal-confirmacao/modal-confirmacao';
 import { ClienteService } from '../../../../shared/services/cliente.service';
-import { ClientesModule } from '../../clientes-module';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-editar-cliente',
   imports: [
     CommonModule,
-    ClientesModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
   ],
   templateUrl: './editar-cliente.html',
 })
@@ -24,6 +31,7 @@ export class EditarCliente {
   private clienteService = inject(ClienteService);
   private dialog = inject(MatDialog);
   private snack = inject(MatSnackBar);
+  fileInputRef = inject<HTMLInputElement>(HTMLInputElement);
 
   form = this.fb.group({
     logotipo: [''],

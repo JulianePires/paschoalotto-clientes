@@ -1,14 +1,6 @@
 {
   "clientes": [
     {
-      "id": "5",
-      "nome": "Fernanda Almeida",
-      "email": "fernanda.almeida@example.com",
-      "telefone": "+5571987001122",
-      "cidade": "Salvador",
-      "logotipo": ""
-    },
-    {
       "id": "c949",
       "nome": "Cliente Teste",
       "email": "teste@teste.com",
@@ -20,6 +12,13 @@
       "email": "novo.cliente@example.com",
       "telefone": "123456789",
       "cidade": "Cidade Exemplo"
+    },
+    {
+      "nome": "Cliente Teste",
+      "email": "cliente@email.com",
+      "telefone": "91238102390129",
+      "cidade": "Cidade",
+      "id": "PE72yB0"
     }
   ]
 }

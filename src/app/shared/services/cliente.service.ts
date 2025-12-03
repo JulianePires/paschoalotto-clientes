@@ -31,7 +31,7 @@ export class ClienteService {
     const formData = new FormData();
     formData.append('logotipo', arquivoLogotipo);
 
-    return this.http.patch(`${this.apiUrl}/${id}/logotipo`, formData);
+    return this.http.patch(`${this.apiUrl}/${id}/upload`, formData);
   }
 
   deletarCliente(id: number) {

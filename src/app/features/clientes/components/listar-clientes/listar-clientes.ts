@@ -1,15 +1,23 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { InputBusca } from '../../../../core/components/input-busca/input-busca';
 import { ModalConfirmacao } from '../../../../core/components/modal-confirmacao/modal-confirmacao';
 import { ClienteService } from '../../../../shared/services/cliente.service';
 import { ICliente } from '../../../../shared/types/cliente.type';
-import { ClientesModule } from '../../clientes-module';
+import { ItemCliente } from '../item-cliente/item-cliente';
 
 @Component({
   selector: 'app-listar-clientes',
-  imports: [ClientesModule, MatExpansionModule, MatPaginatorModule],
+  imports: [
+    MatPaginatorModule,
+    ItemCliente,
+    InputBusca,
+    MatButtonModule,
+    MatExpansionModule
+  ],
   templateUrl: './listar-clientes.html',
 })
 export class ListarClientes implements OnInit {

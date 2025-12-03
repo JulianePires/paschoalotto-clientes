@@ -2,11 +2,10 @@ import { ChangeDetectionStrategy, Component, inject, input, output, signal } fro
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ClienteService } from '../../../../shared/services/cliente.service';
 import { AcoesCliente } from '../acoes-cliente/acoes-cliente';
-import { A11yModule } from "@angular/cdk/a11y";
 
 @Component({
   selector: 'app-item-cliente',
-  imports: [MatExpansionModule, AcoesCliente, A11yModule],
+  imports: [AcoesCliente, MatExpansionModule],
   templateUrl: './item-cliente.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

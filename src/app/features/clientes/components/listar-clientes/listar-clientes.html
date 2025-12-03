@@ -32,7 +32,7 @@
       [length]="clientes.length"
       [pageSize]="limitePorPagina"
       [pageIndex]="paginaAtual - 1"
-      [pageSizeOptions]="[5, 10, 25, 100]"
+      [pageSizeOptions]="[1, 3, 5, 10, 25, 100]"
       aria-label="Select page"
       (page)="changePage($event.pageIndex + 1); changeLimit($event.pageSize)"
     >

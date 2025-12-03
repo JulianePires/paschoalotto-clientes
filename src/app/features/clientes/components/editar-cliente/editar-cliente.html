@@ -4,15 +4,17 @@
     Voltar
   </button>
 
-  <form [formGroup]="form" (ngSubmit)="abrirConfirmacaoEditar()">
-    <div class="w-12 h-12 rounded-full overflow-hidden mb-4 bg-blue-900">
-      @if(!form.get('logotipo')?.value) {
+  <form [formGroup]="form" (ngSubmit)="abrirConfirmacaoEditar()" class="flex flex-col gap-4">
+    <div class="w-24 h-24 rounded-full overflow-hidden mb-8 bg-gray-300 self-center flex items-center justify-center">
+      @if(form.get('logotipo')?.value !== '') {
       <img [src]="form.get('logotipo')?.value" alt="Logotipo" class="w-full h-full object-cover" />
+      } @else {
+        <mat-icon>upload</mat-icon>
       }
-      <input type="file" (change)="uploadLogotipo($event)" />
+      <input type="file" (change)="uploadLogotipo($event)" class="hidden" />
     </div>
 
-    <mat-form-field appearance="fill" class="w-full mb-4">
+    <mat-form-field appearance="fill" class="w-full">
       <mat-label>Nome</mat-label>
       <input matInput formControlName="nome" />
       @if (form.get('nome')?.hasError('required')) {
@@ -20,7 +22,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="w-full mb-4">
+    <mat-form-field appearance="fill" class="w-full">
       <mat-label>Email</mat-label>
       <input matInput formControlName="email" />
       @if (form.get('email')?.hasError('required')) {
@@ -32,9 +34,9 @@
       }
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="w-full mb-4">
+    <mat-form-field appearance="fill" class="w-full">
       <mat-label>Telefone</mat-label>
-      <input matInput formControlName="telefone" (blur)="telefoneBlur()" />
+  <input matInput formControlName="telefone" (blur)="telefoneBlur()" mask="(00) 00000-0000" />
       @if(form.get('telefone')?.hasError('required')) {
       <mat-error>Telefone é obrigatório</mat-error>
       } @if(form.get('telefone')?.hasError('invalidPhone')) {
@@ -42,7 +44,7 @@
       }
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="w-full mb-4">
+    <mat-form-field appearance="fill" class="w-full">
       <mat-label>Cidade</mat-label>
       <input matInput formControlName="cidade" />
       @if(form.get('cidade')?.hasError('required')) {
